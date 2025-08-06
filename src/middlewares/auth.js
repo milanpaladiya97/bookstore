@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import {STATUS, MESSAGES} from '../config/constants.js';
+
 
 export const protect = async (req, res, next) => {
   try {
@@ -9,13 +11,13 @@ export const protect = async (req, res, next) => {
     req.user = await User.findById(decoded.id).select('-password');
     next();
   } catch (err) {
-    res.status(401).json({ message: 'Unauthorized' });
+    res.status(STATUS.UNAUTHORIZED).json({ message: MESSAGES.USER.UNAUTHORIZED });
   }
 };
 
 export const isAdmin = (req, res, next) => {
   if (req.user?.role !== 'admin') {
-    return res.status(403).json({ message: 'Access denied' });
+    return res.status(STATUS.FORBIDDEN).json({ message: MESSAGES.USER.ACCESS_DENIED });
   }
   next();
 };

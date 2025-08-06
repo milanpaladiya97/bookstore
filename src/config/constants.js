@@ -20,6 +20,9 @@ export const MESSAGES = {
         LOGIN_SUCCESS: 'Login successful',
         LOGIN_FAILED: 'Invalid email or password',
         GENERAL_ERROR: 'Something went wrong',
+        UNAUTHORIZED: 'Unauthorized access. Token is missing or invalid.',
+        ACCESS_DENIED: 'Access denied. Admins only.',
+        TOKEN_EXPIRED: 'Session expired. Please log in again.',
     },
     ORDER: {
         PLACED: 'Order placed successfully',
@@ -58,10 +61,11 @@ export const BOOK_CATEGORIES = [
   'Other'
 ];
 
-export const USER_ROLES = ['user', 'admin'];
+export const USER_ROLES = ['user', 'admin', 'customer'];
 
 export const PAYMENT_STATUS = ['pending', 'paid', 'failed'];
 
 export const ORDER_STATUS = ['processing', 'shipped', 'delivered', 'cancelled'];
 
 export const PAYMENT_METHODS = ['cod', 'card', 'wallet', 'upi'];
+
