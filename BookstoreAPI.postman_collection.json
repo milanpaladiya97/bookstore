@@ -1,0 +1,130 @@
+{
+  "info": {
+    "_postman_id": "d22e6745-3477-4e5c-8f9a-8474428eb89d",
+    "name": "BookstoreAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/auth/register",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\",\n  \"phone\": \"9876543210\",\n  \"address\": {\n    \"street\": \"123 Main St\",\n    \"city\": \"Delhi\",\n    \"state\": \"DL\",\n    \"zip\": \"110001\",\n    \"country\": \"India\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Add Book",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/books",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "books"]
+            },
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Clean Code\",\n  \"author\": \"Robert C. Martin\",\n  \"description\": \"A Handbook of Agile Software Craftsmanship\",\n  \"isbn\": \"9780132350884\",\n  \"category\": \"Technology\",\n  \"language\": \"English\",\n  \"price\": 399,\n  \"stock\": 50,\n  \"coverImage\": \"https://example.com/clean-code.jpg\",\n  \"publisher\": \"Prentice Hall\",\n  \"publishedDate\": \"2008-08-01\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get All Books",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/books",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "books"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Place Order",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "orders"]
+            },
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{userToken}}", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"books\": [\n    {\n      \"book\": \"{{bookId}}\",\n      \"quantity\": 2,\n      \"priceAtPurchase\": 399\n    }\n  ],\n  \"shippingAddress\": {\n    \"street\": \"456 Main Road\",\n    \"city\": \"Mumbai\",\n    \"state\": \"MH\",\n    \"zip\": \"400001\",\n    \"country\": \"India\"\n  },\n  \"totalAmount\": 798,\n  \"paymentMethod\": \"COD\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get My Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:5000/api/orders/my-orders",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "orders", "my-orders"]
+            },
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{userToken}}", "type": "text" }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "adminToken", "value": "" },
+    { "key": "userToken", "value": "" },
+    { "key": "bookId", "value": "" }
+  ]
+}
